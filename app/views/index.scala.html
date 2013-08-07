@@ -1,4 +1,4 @@
-@(message: String)
+@(locations: String)
 
 <!DOCTYPE html>
 
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap-3.0.0-spacelab.min.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.js"></script>
     <script src="js/ui-bootstrap-tpls-0.5.0.min.js"></script>
     <script src="js/thecode.js"></script>
     <style> 
@@ -34,5 +35,8 @@
         <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:2">
     </div>
 
+    <script>
+    	console.log("@locations");
+    </script>
 </body>
 </html>
