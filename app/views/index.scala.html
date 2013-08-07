@@ -14,24 +14,116 @@
         body {
             background-color:#99ff33;
         }
+
+        table {
+            background-color:#ffffff;
+        }
+      
     </style>
 </head>
 <body>
     <div class="row">
         <div class="col-lg-3"> 
             <img src="https://trello-attachments.s3.amazonaws.com/5200d963de01ba673f001da9/5200f2978dcaec2b6b001d59/5fce23be7593f42dad20ed9d19696184/Logo_weatherpoof.png" height="200" width="200"  alt="">
-            <font size="10"><strong>WeatherProof</strong></font>
-            <h2><em>Forecast my travel</em></h2>
+        </div>
+        <div class="col-lg-9">
+            <font size="10"><strong>WeatherProof</strong></font> <br>
+            <font size="6"><em>Forecast my travel</em></font>
         </div>
     </div>
 
     <div class="jumbotron">
-        <p>Welcome to WeatherProof the online facility that gives daily advice on how to prepare for the day ahead </p>
+        <p>Welcome to WeatherProof the online facility that gives daily advice on how to prepare for the day ahead, choose a time and where you'll be then discover what you'll need for your day ahead</p>
     </div>
 
     <div class='container-fluid' ng-controller="TypeaheadCtrl">
         <pre>Model: {{selected| json}}</pre>
         <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:2">
     </div>
+
+    <div>
+        <br>
+        <h1 align='center'><strong> AM </h1></strong> 
+        <br>
+        <table border="2" cellpadding='10' align='center'>
+            <tr>
+                <td>12</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+            </tr>
+        </table> <br>
+        <h1 align='center'><strong> PM </h1></strong> 
+        <br>
+         <table border="2" cellpadding='10' align='center'>
+            <tr>      
+                <td>12</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+                <td><input type='checkbox'></td>
+           </tr>
+        </table>
+        <br>  
+    </div>
+    <div>
+        <br> 
+        <center><button  type="button" width= '1000'
+        onclick="alert('Today you need to wear:')">Give me my advice!</button></center>
+
+<br>
+
+<div class="col-lg-4">
+<div class="input-group">
+<input type="text" class="form-control">
+<span class="input-group-btn input-lg">
+<center><button class="btn btn-default" width="500" type="button">Go!</button>
+</center>
+</span>
+</div>
+
 </body>
 </html>
