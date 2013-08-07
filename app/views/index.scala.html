@@ -4,18 +4,34 @@
 
 <html ng-app="weatherproof">
 <head>
-	<title>WeatherProof</title>
-	<link rel="stylesheet" href="css/bootstrap-3.0.0-spacelab.min.css">
+    <title>WeatherProof</title>
+    <link rel="stylesheet" href="css/bootstrap-3.0.0-spacelab.min.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="js/ui-bootstrap-tpls-0.5.0.min.js"></script>
-	<script src="js/thecode.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.5.0.min.js"></script>
+    <script src="js/thecode.js"></script>
+    <style> 
+        body {
+            background-color:#99ff33;
+        }
+    </style>
 </head>
 <body>
-	<h1>WeatherProof</h1>
-	<div class='container-fluid' ng-controller="TypeaheadCtrl">
-	    <pre>Model: {{selected| json}}</pre>
-	    <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:2">
-	</div>
+    <div class="row">
+        <div class="col-lg-3"> 
+            <img src="https://trello-attachments.s3.amazonaws.com/5200d963de01ba673f001da9/5200f2978dcaec2b6b001d59/5fce23be7593f42dad20ed9d19696184/Logo_weatherpoof.png" height="200" width="200"  alt="">
+            <font size="10"><strong>WeatherProof</strong></font>
+            <h2><em>Forecast my travel</em></h2>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <p>Welcome to WeatherProof the online facility that gives daily advice on how to prepare for the day ahead </p>
+    </div>
+
+    <div class='container-fluid' ng-controller="TypeaheadCtrl">
+        <pre>Model: {{selected| json}}</pre>
+        <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:2">
+    </div>
 </body>
 </html>
