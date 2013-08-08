@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index
 
 GET     /api/locations              controllers.Application.locationsFeed
+GET     /api/weather/:location      controllers.Application.weatherFeed(location: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /*file               controllers.Assets.at(path="/public", file)
