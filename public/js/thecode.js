@@ -5,7 +5,6 @@ myApp.config(['$httpProvider', function($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
-var keyString = '1fd60563-da77-4bb9-88d5-0444be01310f';
 
 function TypeaheadCtrl($scope, $http) {
     $scope.selected = undefined;

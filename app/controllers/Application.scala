@@ -8,21 +8,21 @@ import play.api.libs.json.JsValue
 
 object Application extends Controller {
   
-  val keyString = "1fd60563-da77-4bb9-88d5-0444be01310f"
+  private val metOfficeKey = "1fd60563-da77-4bb9-88d5-0444be01310f"
+
+  private lazy val locationsJson = {
+    val responseFuture = WS.url("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist")
+      .setQueryParameter("key", metOfficeKey)
+      .get
+    responseFuture.get.getBody
+  }
 
   def index = Action {
-    val responseFuture = WS.url("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist")
-      .setQueryParameter("key",keyString)
-      .get
-    val locationsJson = responseFuture.get.getBody
-    val json = Json.parse(locationsJson)
-    // val locations = (json \ "locations").as[List[JsValue]]
-    // val idPlaceMappings = locations.map {
-    //   location =>
-    //   (location \ "id").as[String] -> (location \ "name").as[String]
-    // }.toMap
-    // Ok(views.html.index(Json.toJson(idPlaceMappings).toString))
-    Ok(views.html.index(json.toString))
+    Ok(views.html.index(""))
+  }
+
+  def locationsFeed = Action {
+    Ok(locationsJson)
   }
   
 }
