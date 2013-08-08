@@ -3,8 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 import play.libs.WS
-import play.api.libs.json.Json
-import play.api.libs.json.JsValue
+import play.api.libs.json._
 
 object Application extends Controller {
   
@@ -12,6 +11,17 @@ object Application extends Controller {
 
   private lazy val locationsJson = {
     val responseFuture = WS.url("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist")
+      .setQueryParameter("key", metOfficeKey)
+      .get
+    val root = Json.parse(responseFuture.get.getBody)
+    val locations = (root \ "Locations" \ "Location").asOpt[List[Map[String,String]]].getOrElse(List())
+    val locMap = locations.map(x => x("name"))
+    val json = Json.toJson(locMap)
+    Json.stringify(json)
+  }
+
+  private def temperaturesForLocation(locationId: Int) = {
+  	val responseFuture = WS.url(s"http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/$locationId?res=3hourly")
       .setQueryParameter("key", metOfficeKey)
       .get
     responseFuture.get.getBody
