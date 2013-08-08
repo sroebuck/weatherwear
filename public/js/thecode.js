@@ -9,6 +9,3 @@ function TypeaheadCtrl($scope, $http) {
     });
 
 }
-
-
-
