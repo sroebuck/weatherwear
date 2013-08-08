@@ -9,3 +9,8 @@ function TypeaheadCtrl($scope, $http) {
     });
 
 }
+
+function HoursOutdoors($scope) {
+
+
+}
