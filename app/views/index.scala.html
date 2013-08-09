@@ -10,6 +10,7 @@
     <script src="/js/angular-1.0.7.min.js"></script>
     <script src="/js/angular-resource-1.0.7.min.js"></script>
     <script src="js/ui-bootstrap-tpls-0.5.0.min.js"></script>
+    <script src="js/lodash-1.3.1.min.js"></script>
     <script src="js/thecode.js"></script>
     <style> 
         body {
@@ -41,9 +42,10 @@
         <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8">
     </div>
 
-    <div ng-controller="HoursOutdoorss">
+    <div ng-controller="HoursOutdoors">
         <br>
         <h4 align = 'center'> Tick the hours when you will be outside:</h4>
+        <p>testValue: {{testValue}}</p>
         <h1 align='center'><strong> AM </h1></strong> 
         <br>
         <table border="2" cellpadding='10' align='center'>
@@ -62,18 +64,18 @@
                 <td><font size="5">11</font></td>
             </tr>
             <tr>
-                <td><input type='checkbox' ng-model='hour00'></td>
-                <td><input type='checkbox' ng-model='hour01'></td>
-                <td><input type='checkbox' ng-model='hour02'></td>
-                <td><input type='checkbox' ng-model='hour03'></td>
-                <td><input type='checkbox' ng-model='hour04'></td>
-                <td><input type='checkbox' ng-model='hour05'></td>
-                <td><input type='checkbox' ng-model='hour06'></td>
-                <td><input type='checkbox' ng-model='hour07'></td>
-                <td><input type='checkbox' ng-model='hour08'></td>
-                <td><input type='checkbox' ng-model='hour09'></td>
-                <td><input type='checkbox' ng-model='hour10'></td>
-                <td><input type='checkbox' ng-model='hour11'></td>
+                <td><input type='checkbox' ng-model='hour[0]'></td>
+                <td><input type='checkbox' ng-model='hour[1]'></td>
+                <td><input type='checkbox' ng-model='hour[2]'></td>
+                <td><input type='checkbox' ng-model='hour[3]'></td>
+                <td><input type='checkbox' ng-model='hour[4]'></td>
+                <td><input type='checkbox' ng-model='hour[5]'></td>
+                <td><input type='checkbox' ng-model='hour[6]'></td>
+                <td><input type='checkbox' ng-model='hour[7]'></td>
+                <td><input type='checkbox' ng-model='hour[8]'></td>
+                <td><input type='checkbox' ng-model='hour[9]'></td>
+                <td><input type='checkbox' ng-model='hour[10]'></td>
+                <td><input type='checkbox' ng-model='hour[11]'></td>
             </tr>
         </table> <br>
         <h1 align='center'><strong> PM </h1></strong> 
@@ -94,18 +96,18 @@
                 <td><font size="5">11</font></td>
             </tr>
             <tr>
-                <td><input type='checkbox' ng-model='hour12'></td>
-                <td><input type='checkbox' ng-model='hour13'></td>
-                <td><input type='checkbox' ng-model='hour14'></td>
-                <td><input type='checkbox' ng-model='hour15'></td>
-                <td><input type='checkbox' ng-model='hour16'></td>
-                <td><input type='checkbox' ng-model='hour17'></td>
-                <td><input type='checkbox' ng-model='hour18'></td>
-                <td><input type='checkbox' ng-model='hour19'></td>
-                <td><input type='checkbox' ng-model='hour20'></td>
-                <td><input type='checkbox' ng-model='hour21'></td>
-                <td><input type='checkbox' ng-model='hour22'></td>
-                <td><input type='checkbox' ng-model='hour23'></td>
+                <td><input type='checkbox' ng-model='hour[12]'></td>
+                <td><input type='checkbox' ng-model='hour[13]'></td>
+                <td><input type='checkbox' ng-model='hour[14]'></td>
+                <td><input type='checkbox' ng-model='hour[15]'></td>
+                <td><input type='checkbox' ng-model='hour[16]'></td>
+                <td><input type='checkbox' ng-model='hour[17]'></td>
+                <td><input type='checkbox' ng-model='hour[18]'></td>
+                <td><input type='checkbox' ng-model='hour[19]'></td>
+                <td><input type='checkbox' ng-model='hour[20]'></td>
+                <td><input type='checkbox' ng-model='hour[21]'></td>
+                <td><input type='checkbox' ng-model='hour[22]'></td>
+                <td><input type='checkbox' ng-model='hour[23]'></td>
            </tr>
         </table>
         <br>  
