@@ -3,10 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                             controllers.Application.index
 
-GET     /api/locations              controllers.Application.locationsFeed
-GET     /api/weather/:location      controllers.Application.weatherFeed(location: Int)
+GET     /api/locations                controllers.Application.locationsFeed
+GET     /api/weather/:locationId      controllers.Application.weatherFeed(locationId: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /*file               controllers.Assets.at(path="/public", file)
