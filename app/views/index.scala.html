@@ -28,11 +28,15 @@
         h1 {
             margin-top: 0;
         }
+        div.alert {
+            text-align: center;
+            font-size: 150%;
+        }
       
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container" ng-controller="OverallController">
     <div class="row">
         <div class="col-lg-3"> 
             <img src="/img/logo_weatherpoof.png" height="300" width="300"  alt="">
@@ -47,7 +51,7 @@
     </div>
 
 
-    <div ng-controller="TypeaheadCtrl">
+    <div>
         <h4 align='center'>Choose the location:</h4>
         <div class="row">
         <div class="col-lg-4"></div>
@@ -57,7 +61,7 @@
         </div>
     </div>
 
-    <div ng-controller="HoursOutdoors">
+    <div>
         <h4 align='center'>Tick the hours when you will be outside:</h4>
         <div class="row">
             <div class="col-lg-6">
@@ -69,7 +73,7 @@
                         <td><font size="5.5">2</font></td>
                         <td><font size="5.5">3</font></td>
                         <td><font size="5.5">4</font></td>
-                        <td><font size="5.5">5</font></font></td>
+                        <td><font size="5.5">5</font></td>
                         <td><font size="5.5">6</font></td>
                         <td><font size="5.5">7</font></td>             
                         <td><font size="5.5">8</font></td>
@@ -102,7 +106,7 @@
                         <td><font size="5.5">2</font></td>
                         <td><font size="5.5">3</font></td>
                         <td><font size="5.5">4</font></td>
-                        <td><font size="5.5">5</font></font></td>
+                        <td><font size="5.5">5</font></td>
                         <td><font size="5.5">6</font></td>
                         <td><font size="5.5">7</font></td>
                         <td><font size="5.5">8</font></td>
@@ -128,11 +132,13 @@
             </div>
         </div>
     </div>
-    <div>
-        <br> 
-        <center><button  type="button" width= '1000'
-        onclick="alert('Today you need to wear:')">Give me my advice!</button></center>
-
+    <br>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="alert col-lg-8">
+            <p>Clothing advice:<br><strong>{{advice}}</strong></p>
+        </div>
+    </div>
 </div>
 </body>
 </html>

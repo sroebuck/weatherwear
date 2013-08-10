@@ -9,8 +9,13 @@ if (!Object.keys) Object.keys = function(o) {
     return p;
 }
 
-function TypeaheadCtrl($scope, $http) {
+function OverallController($scope, $http) {
+
     $scope.selectedLocation = undefined;
+
+    $scope.hour = [];
+
+    $scope.advice = "Rain Jacket, Jacket, Jumper and scarf";
 
     // Download the list of locations
     $http.get('/api/locations').success(function(json) {
@@ -31,14 +36,6 @@ function TypeaheadCtrl($scope, $http) {
         }
     }
 
-    $scope.$watch('selectedLocation', changedLocation);
-
-}
-
-function HoursOutdoors($scope) {
-
-    $scope.hour = [];
-
     function changedHours(newHours, oldHours, scope) {
         var ticks = 0;
         _.forEach(scope.hour, function(h) {
@@ -49,7 +46,6 @@ function HoursOutdoors($scope) {
 
     $scope.$watch('hour', changedHours, true);
 
-
-
+    $scope.$watch('selectedLocation', changedLocation);
 
 }
