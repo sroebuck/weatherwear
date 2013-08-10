@@ -6,6 +6,7 @@ import play.api.libs.json._
 import org.joda.time.LocalTime
 import scala.util.Try
 
+
 object Application extends Controller {
   
   private val metOfficeKey = "1fd60563-da77-4bb9-88d5-0444be01310f"

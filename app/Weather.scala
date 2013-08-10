@@ -1,37 +1,37 @@
 object Weather {
 
-	def weatherOutput(rain: Double, wind: Double, uv: Double, temp: Double): String = {
+	def weatherOutput(maxRain: Double, maxWind: Double, maxUV: Double, maxTemp: Double): String = {
 
-		println(s"rain = $rain, wind = $wind, uv = $uv, temp = $temp")
+		println(s"maxRain = $maxRain, maxWind = $maxWind, maxUV = $maxUV, maxTemp = $maxTemp")
 
 		var clothesOutput: String = ""
 
 		// Rain
 
-		if (rain <= 0.3) clothesOutput = ""
+		if (maxRain <= 0.3) clothesOutput = ""
 		else clothesOutput = "Rain Jacket and/or umbrella"
 
-		//wind
+		//maxWind
 
-		if (wind < 5.5) clothesOutput = clothesOutput
-		else if (wind < 14.5) clothesOutput = clothesOutput + "jacket"
+		if (maxWind < 5.5) clothesOutput = clothesOutput
+		else if (maxWind < 14.5) clothesOutput = clothesOutput + "jacket"
 		else {
-		    if (wind < 30.5 && rain > 0.3) clothesOutput = "Jacket, Jumper and scarf"
-		    else if (rain >= 0.3) clothesOutput = "Rain Jacket, Jacket, Jumper and scarf"
+		    if (maxWind < 30.5 && maxRain > 0.3) clothesOutput = "Jacket, Jumper and scarf"
+		    else if (maxRain >= 0.3) clothesOutput = "Rain Jacket, Jacket, Jumper and scarf"
 		}
 
 		//Uv
 
-		if (uv <= 2) clothesOutput = clothesOutput
+		if (maxUV <= 2) clothesOutput = clothesOutput
 		else clothesOutput = clothesOutput + ", suncream"
 
-		// temperature
+		// maxTemperature
 
-		if (temp <= 0) clothesOutput = clothesOutput + ", a warm jaccket, jumper, scarf, hat and gloves"
-		else if (temp > 0 && temp < 10) clothesOutput = clothesOutput + ", a warm jacket or jumper"
-		else if (temp > 10 && temp < 20) clothesOutput = clothesOutput + ", jacket"
-		else if (temp > 20 ) clothesOutput = clothesOutput + ", a sun hat and stay hydrated"
-		else {if (temp > 20 && uv >= 2) clothesOutput = clothesOutput + ", suncream, sun hat and stay hydrated"
+		if (maxTemp <= 0) clothesOutput = clothesOutput + ", a warm jaccket, jumper, scarf, hat and gloves"
+		else if (maxTemp > 0 && maxTemp < 10) clothesOutput = clothesOutput + ", a warm jacket or jumper"
+		else if (maxTemp > 10 && maxTemp < 20) clothesOutput = clothesOutput + ", jacket"
+		else if (maxTemp > 20 ) clothesOutput = clothesOutput + ", a sun hat and stay hydrated"
+		else {if (maxTemp > 20 && maxUV >= 2) clothesOutput = clothesOutput + ", suncream, sun hat and stay hydrated"
 		} 
 
 		// Other if then else statements

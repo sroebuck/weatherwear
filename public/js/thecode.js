@@ -30,7 +30,7 @@ function OverallController($scope, $http) {
             var locationId = $scope.locationsMap[$scope.selectedLocation];
             $http.get('/api/weather/' + locationId).success(function(json) {
                 $scope.weathers = json;
-                console.log($scope.weathers);
+                recalculateAdvice();
             });
 
         }
@@ -42,6 +42,24 @@ function OverallController($scope, $http) {
             if (h) ticks = ticks + 1;
         });        
         scope.testValue = ticks;
+        recalculateAdvice();
+    }
+
+    function recalculateAdvice() {
+        var details = getWeatherDetailsForOutdoorPeriod();
+        console.log(details);
+        var advice = calculateAdvice(details.maxRain, details.maxWind, details.maxTemp, details.maxUV);
+        $scope.advice = advice;
+    }
+
+    function getWeatherDetailsForOutdoorPeriod() {
+        return {
+            minTemp: 4,
+            maxTemp: 20,
+            maxRain: 45,
+            maxWind: 5,
+            MaxUV: 2
+        }
     }
 
     $scope.$watch('hour', changedHours, true);
