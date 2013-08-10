@@ -47,19 +47,55 @@ function OverallController($scope, $http) {
 
     function recalculateAdvice() {
         var details = getWeatherDetailsForOutdoorPeriod();
-        console.log(details);
-        var advice = calculateAdvice(details.maxRain, details.maxWind, details.maxTemp, details.maxUV);
-        $scope.advice = advice;
+        if (details == undefined) $scope.advice = "No advice available - please select a location"
+        else {
+            console.log(details);
+            var advice = calculateAdvice(details.maxRain, details.maxWind, details.maxTemp, details.maxUV);
+            $scope.advice = advice;
+        }
     }
 
     function getWeatherDetailsForOutdoorPeriod() {
-        return {
-            minTemp: 4,
-            maxTemp: 20,
-            maxRain: 45,
-            maxWind: 5,
-            MaxUV: 2
+        var today = dateToDayTime(new Date());
+        var weathers = $scope.weathers;
+        var todaysWeather = _.filter(weathers, function(weather) {
+            var d = dateToDayTime(new Date(Date.parse(weather.date)));
+            return d === today;
+        });
+        var convertedKeys = _.map(todaysWeather, function(weather) {
+            return {
+                date: weather.date,
+                hour: weather.hour,
+                temp: weather.T,
+                rain: weather.Pp,
+                wind: weather.S,
+                gust: weather.G,
+                UV: weather.U
+            };
+        });
+        var accumulator = {
+            minTemp: Number.MAX_VALUE,
+            maxTemp: Number.MIN_VALUE,
+            maxRain: Number.MIN_VALUE,
+            maxWind: Number.MIN_VALUE,
+            maxUV: Number.MIN_VALUE
         }
+        var summary = _.reduce(convertedKeys, function(acc, weather) {
+            acc.minTemp = Math.min(acc.minTemp, weather.temp);
+            acc.maxTemp = Math.max(acc.maxTemp, weather.temp);
+            acc.maxRain = Math.max(acc.maxRain, weather.rain);
+            acc.maxWind = Math.max(acc.maxWind, weather.wind);
+            acc.maxUV = Math.max(acc.maxUV, weather.UV);
+            return acc;
+        }, accumulator);
+        // If there are no weather results for today then return an undefined value otherwise return the results...
+        if (todaysWeather.length == 0) return undefined
+        else return summary;
+    }
+
+    function dateToDayTime(date) {
+        var day = new Date(date.getYear(), date.getMonth(), date.getDate());
+        return day.getTime();
     }
 
     $scope.$watch('hour', changedHours, true);
