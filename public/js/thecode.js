@@ -17,6 +17,8 @@ function OverallController($scope, $http) {
 
     $scope.advice = "Rain Jacket, Jacket, Jumper and scarf";
 
+    $scope.explanation = "";
+
     // Download the list of locations
     $http.get('/api/locations').success(function(json) {
         $scope.locationsMap = json;
@@ -47,9 +49,13 @@ function OverallController($scope, $http) {
 
     function recalculateAdvice() {
         var details = getWeatherDetailsForOutdoorPeriod();
-        if (details == undefined) $scope.advice = "No advice available - please select a location"
-        else {
-            console.log(details);
+        if (details == undefined) {
+            $scope.advice = "No advice available - please select a location"
+            $scope.explanation = "No weather details"
+        } else {
+            $scope.explanation = "minTemp: " + details.minTemp + "C, maxTemp: " + details.maxTemp +
+                "C, maxRainProb: " + details.maxRain + "%, maxWind: " + details.maxWind +
+                "mph, maxUV: " + details.maxUV;
             var advice = calculateAdvice(details.maxRain, details.maxWind, details.maxTemp, details.maxUV);
             $scope.advice = advice;
         }
