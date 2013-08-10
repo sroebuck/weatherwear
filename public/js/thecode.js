@@ -13,7 +13,12 @@ function OverallController($scope, $http) {
 
     $scope.selectedLocation = undefined;
 
-    $scope.hour = [];
+    // Preset some default outdoor hours...
+    $scope.hour = new Array();
+    var defaultOutdoorHours = [6,7,8,9,12,13,17,18,19];
+    _.forEach(defaultOutdoorHours, function(hour) {
+        $scope.hour[hour] = true;
+    });
 
     $scope.advice = "Rain Jacket, Jacket, Jumper and scarf";
 
@@ -39,15 +44,11 @@ function OverallController($scope, $http) {
     }
 
     function changedHours(newHours, oldHours, scope) {
-        var ticks = 0;
-        _.forEach(scope.hour, function(h) {
-            if (h) ticks = ticks + 1;
-        });        
-        scope.testValue = ticks;
         recalculateAdvice();
     }
 
     function recalculateAdvice() {
+        console.log("Recalculating advice");
         var details = getWeatherDetailsForOutdoorPeriod();
         if (details == undefined) {
             $scope.advice = "No advice available - please select a location"
@@ -62,13 +63,25 @@ function OverallController($scope, $http) {
     }
 
     function getWeatherDetailsForOutdoorPeriod() {
-        var today = dateToDayTime(new Date());
+        var now = new Date();
+        var today = dateToDayTime(now);
+        // If it's after 6pm start planning for tomorrow...
+        if (now.getHours() > 18) today = today + (1000 * 60 * 60 * 24);
         var weathers = $scope.weathers;
+        // Take all the weather information and filter out only those entries for the current day...
         var todaysWeather = _.filter(weathers, function(weather) {
             var d = dateToDayTime(new Date(Date.parse(weather.date)));
             return d === today;
         });
-        var convertedKeys = _.map(todaysWeather, function(weather) {
+        // Filter out only those hour entries currently ticked...
+        var selectedHours = _.filter(todaysWeather, function(weather) {
+            var startHour = Number(weather.hours) - 1;
+            var endHour = Number(weather.hours) + 1;
+            var hourSlice = $scope.hour.slice(startHour, endHour);
+            return _.any(hourSlice);
+        });
+        // Take the data with the meaningless keys that come from MetOffice and replace them with meaningful ones...
+        var convertedKeys = _.map(selectedHours, function(weather) {
             return {
                 date: weather.date,
                 hour: weather.hour,
@@ -79,6 +92,7 @@ function OverallController($scope, $http) {
                 UV: weather.U
             };
         });
+        // Set starting values from which to determine minimums and maximums from the real data...
         var accumulator = {
             minTemp: Number.MAX_VALUE,
             maxTemp: Number.MIN_VALUE,
@@ -86,6 +100,7 @@ function OverallController($scope, $http) {
             maxWind: Number.MIN_VALUE,
             maxUV: Number.MIN_VALUE
         }
+        // Go through all the relevant weather and establish the maximum and minimums...
         var summary = _.reduce(convertedKeys, function(acc, weather) {
             acc.minTemp = Math.min(acc.minTemp, weather.temp);
             acc.maxTemp = Math.max(acc.maxTemp, weather.temp);
